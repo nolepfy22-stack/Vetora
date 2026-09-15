@@ -281,22 +281,52 @@ function mergeMaterialsWithStored(stored: Material[] | null): Material[] {
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   // Navigation State
+  // Navigation State
+  // Vite uses "/" in development and "/Vetora/" on GitHub Pages.
+  const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+  const getAppRoute = () => {
+    const path = window.location.pathname || '/';
+
+    // Remove GitHub Pages base path before giving the route to the app.
+    if (BASE_PATH && path.startsWith(BASE_PATH)) {
+      return path.slice(BASE_PATH.length) || '/';
+    }
+
+    return path;
+  };
+
+  const getBrowserPath = (route: string) => {
+    const cleanRoute = route.startsWith('/') ? route : `/${route}`;
+
+    if (BASE_PATH) {
+      return `${BASE_PATH}${cleanRoute}`;
+    }
+
+    return cleanRoute;
+  };
+
   const [currentRoute, setCurrentRoute] = useState<string>(() => {
-    // Check window.location.pathname or localStorage
-    const path = window.location.pathname;
-    if (path && path !== '/' && path !== '') {
+    const path = getAppRoute();
+
+    if (path && path !== '/') {
       return path;
     }
+
     return loadStorage(STORAGE_KEYS.CURRENT_ROUTE, '/');
   });
 
   const [historyStack, setHistoryStack] = useState<string[]>([currentRoute]);
 
   const navigate = (route: string) => {
-    setCurrentRoute(route);
-    setHistoryStack((prev) => [...prev, route]);
-    window.history.pushState(null, '', route);
-    saveStorage(STORAGE_KEYS.CURRENT_ROUTE, route);
+    const cleanRoute = route.startsWith('/') ? route : `/${route}`;
+
+    setCurrentRoute(cleanRoute);
+    setHistoryStack((prev) => [...prev, cleanRoute]);
+
+    window.history.pushState(null, '', getBrowserPath(cleanRoute));
+
+    saveStorage(STORAGE_KEYS.CURRENT_ROUTE, cleanRoute);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -304,10 +334,14 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     if (historyStack.length > 1) {
       const newStack = [...historyStack];
       newStack.pop();
+
       const prevRoute = newStack[newStack.length - 1];
+
       setHistoryStack(newStack);
       setCurrentRoute(prevRoute);
-      window.history.pushState(null, '', prevRoute);
+
+      window.history.pushState(null, '', getBrowserPath(prevRoute));
+
       saveStorage(STORAGE_KEYS.CURRENT_ROUTE, prevRoute);
     } else {
       navigate('/');
@@ -316,12 +350,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   useEffect(() => {
     const handlePopState = () => {
-      const path = window.location.pathname || '/';
+      const path = getAppRoute();
+
       setCurrentRoute(path);
       saveStorage(STORAGE_KEYS.CURRENT_ROUTE, path);
     };
+
     window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
   }, []);
 
   // Persistent States
