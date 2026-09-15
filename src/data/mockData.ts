@@ -18,7 +18,7 @@ import {
 
 // Image assets from curated veterinary plates
 export const ASSETS = {
-  catHero: 'https://images.unsplash.com/photo-1611267254323-4db7b39c732c?q=80&w=686&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  catHero: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQo5BFGk0VfE06G_bn08bAoj8HeBqqi_YaMpMJoNcvxyvpScFz_33bKA7A&s=10',
   heartDiagram: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAMLCDcdG-gSWaU8ZRUHQZ7L7W5bj5H1y1mtBOGw0_DHbhAR6YOAOqAFg3S0CkYWRzlmIFEjJEnr5pudLMKGE2wjtMLMI7KLaRhGxvyHfes-6_yX-_dqDREwkpVFXK5EhRPGJdACFS5lTIKKpYCwvrP1zGHfT6pVyobGeAawiz1cln4gEYF-XOE31a7qPZPCNr4rA-l-iQGvYbt5IiIwXGUPRHKrZHG-2Ps-FIktlHqvNj_7OJrL2WBog',
   heartExterior: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBwOCjEbR1bxyHbpPzb0N4oUWZP7Z6itNdKWGi2pQ06Seodz3eNstZS2p3dCqilcHifzWQfcQevS36iwwe9-QVdu7Pz7N-cA9t3D3t2_1TnzGwKODP_2lqZqsXVvWUOfqPwKO-KhKL7lX1ciI-5Bj4I3gcf5bVNZSzm9R3zvBDw_V2EpbRa_Zl6qGRrVDu0rh8PB26trKPxikeQ_QMY8U09Kz871lLZ2jDliNKO_dvZEOSbuewmkSChYQ',
   crossSection: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCXog30N4PV2selm3IUgiXKIFC790pEhpsZtnCIl0IwWp7ge0LVuZ4qcI485L_bqZW5_y206Qu_uiErjsxy8GS4LaLeQbnTu7_xEtHd4IiYuHAGulUMNKrN2z7JjEbj1bfy94hYEPH4aElwCW3X4jrJ5_RmJs73sdLsTxPe7PEhkAnzW_do2IC2-oCKnsKnqzg1Y_qZebIlllzYUJ9TmdZ5G64BckYIWMsXVLVnZA_3p7nLRqUMfalbxQ',

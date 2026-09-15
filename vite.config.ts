@@ -5,7 +5,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig(() => {
   return {
-    base: '/Vetora/',
+    base: process.env.NODE_ENV === 'production' ? '/Vetora/' : '/',
 
     plugins: [react(), tailwindcss()],
 
